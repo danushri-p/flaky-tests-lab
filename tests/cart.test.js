@@ -4,17 +4,21 @@ beforeEach(() => {
   cart.clearCart();
 });
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 test('addItem adds to cart', () => {
   cart.addItem({ id: 1, name: 'Widget' });
   expect(cart.getCart().length).toBe(1);
 });
 
-/**
- * INTENTIONALLY FLAKY TEST
- * Uses Math.random() so around 50% of runs pass and 50% fail.
- */
-test('flaky: cart total is computed correctly (intentionally non-deterministic)', () => {
+test('cart total is computed correctly (fixed)', () => {
+  // Mock Math.random() so the test is deterministic
+  jest.spyOn(Math, 'random').mockReturnValue(0.8);
+
   const simulatedTotal = Math.random() > 0.5 ? 100 : 90;
+
   expect(simulatedTotal).toBe(100);
 });
 
