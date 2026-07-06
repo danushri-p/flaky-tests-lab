@@ -10,12 +10,11 @@ test('addItem adds to cart', () => {
 });
 
 /**
- * INTENTIONALLY FLAKY TEST — for debugging/CI analysis demonstration.
- * Uses Math.random() so ~50% of runs pass and ~50% fail.
- * This is NOT a real test. Do NOT use this pattern in production.
+ * INTENTIONALLY FLAKY TEST
+ * Uses Math.random() so around 50% of runs pass and 50% fail.
  */
 test('flaky: cart total is computed correctly (intentionally non-deterministic)', () => {
-  const simulatedTotal = 100;
+  const simulatedTotal = Math.random() > 0.5 ? 100 : 90;
   expect(simulatedTotal).toBe(100);
 });
 
